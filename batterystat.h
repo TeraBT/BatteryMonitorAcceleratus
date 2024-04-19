@@ -1,7 +1,7 @@
 #ifndef PRAETOR_SYSTEMATIS_BATTERYSTAT_H
 #define PRAETOR_SYSTEMATIS_BATTERYSTAT_H
 
-#include <windows.h>
+#include <Windows.h>
 
 
 class BatteryStatus {

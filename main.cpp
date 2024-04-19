@@ -1,4 +1,5 @@
 #include <iostream>
+#include <Windows.h>
 #include "batterystat.h"
 
 int main(int argc, char *argv[]) {
@@ -20,6 +21,8 @@ int main(int argc, char *argv[]) {
     } else {
         std::cout << "Normal Battery State: " << batteryLevel << '%' << std::endl;;
     }
+
+    Sleep(3000);
 
     return EXIT_SUCCESS;
 }
