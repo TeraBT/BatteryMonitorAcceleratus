@@ -3,25 +3,71 @@
 
 #if defined(_WIN32) || defined(_WIN64)
 
-BatteryStatus::BatteryStatus() : powerStatus() {
-    update();
+#include <Windows.h>
+
+struct BatteryStatus::Impl {
+    SYSTEM_POWER_STATUS powerStatus;
+
+    void update() {
+        GetSystemPowerStatus(&powerStatus);
+    }
+};
+
+BatteryStatus::BatteryStatus() : pImpl(new Impl()) {
+    pImpl->update();
 }
 
-void BatteryStatus::update() {
-    GetSystemPowerStatus(&powerStatus);
-}
+BatteryStatus::~BatteryStatus() = default;
 
 int BatteryStatus::getBatteryLevel() {
-    update();
-    return static_cast<int>(powerStatus.BatteryLifePercent);
+    pImpl->update();  // Ensure the latest status is fetched
+    return static_cast<int>(pImpl->powerStatus.BatteryLifePercent);
 }
 
 bool BatteryStatus::isCharging() {
-    update();
-    return (powerStatus.BatteryFlag == 8);
+    pImpl->update();  // Ensure the latest status is fetched
+    return (pImpl->powerStatus.BatteryFlag & 8) != 0; // Check if charging
 }
+
 #elif defined(__linux__)
-// todo
+
+#include <fstream>
+#include <string>
+
+struct BatteryStatus::Impl {
+    int batteryLevel;
+    bool isCharging;
+
+    void update() {
+        std::ifstream capacityFile("/sys/class/power_supply/BAT0/capacity");
+        std::ifstream statusFile("/sys/class/power_supply/BAT0/status");
+
+        if (capacityFile.is_open()) {
+            capacityFile >> batteryLevel;
+        }
+
+        if (statusFile.is_open()) {
+            std::string status;
+            statusFile >> status;
+            isCharging = (status == "Charging");
+        }
+    }
+};
+
+BatteryStatus::BatteryStatus() : pImpl(new Impl()) {
+    pImpl->update();
+}
+
+BatteryStatus::~BatteryStatus() = default;
+
+int BatteryStatus::getBatteryLevel() {
+    return pImpl->batteryLevel;
+}
+
+bool BatteryStatus::isCharging() {
+    return pImpl->isCharging;
+}
+
 
 #else
 // todo

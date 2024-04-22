@@ -20,8 +20,27 @@ public:
 
 #elif defined(__linux__)
 
+#include <memory>
+
+class BatteryStatus {
+private:
+    struct Impl;
+    std::unique_ptr<Impl> pImpl;
+
+public:
+    BatteryStatus();
+
+    ~BatteryStatus();  // Needed to define a custom destructor
+    BatteryStatus(const BatteryStatus &) = delete; // Prevent copying
+    BatteryStatus &operator=(const BatteryStatus &) = delete; // Prevent assignment
+
+    int getBatteryLevel();
+
+    bool isCharging();
+};
+
 #else
-//todo
+
 #endif
 
 #endif
