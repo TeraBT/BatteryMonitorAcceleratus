@@ -7,5 +7,6 @@ set(CMAKE_EXE_LINKER_FLAGS "--static")
 
 add_executable(praetor_systematis
         main.cpp
-        batterystat.cpp)
+        batterystat.cpp
+)
 

@@ -1,5 +1,7 @@
 #include <iostream>
 #include <Windows.h>
+#include <format>
+
 #include "batterystat.h"
 
 int main(int argc, char *argv[]) {
@@ -9,20 +11,22 @@ int main(int argc, char *argv[]) {
     bool isCharging;
     int batteryLevel;
 
-    isCharging = batteryStatus.isCharging();
-    batteryLevel = batteryStatus.getBatteryLevel();
+    while(true) {
+        isCharging = batteryStatus.isCharging();
+        batteryLevel = batteryStatus.getBatteryLevel();
 
-    if (isCharging && batteryLevel >= 80) {
-        std::cout << "Accumulātōris vis satis magna: " << batteryLevel << '%' << std::endl;
+        if (isCharging && batteryLevel >= 80) {
+            std::cout << std::format("Accumulātōris vis satis magna: {}%\n", batteryLevel);
 
+        } else if (!isCharging && batteryLevel <= 20) {
+            std::cout << std::format("Accumulātōris vis satis parva: {}%\n", batteryLevel);
+        } else {
+            std::cout << std::format("Normal battery state: {}%\n", batteryLevel);
+        }
 
-    } else if (!isCharging && batteryLevel <= 20) {
-        std::cout << "Accumulātōris vis satis parva: " << batteryLevel << '%' << std::endl;
-    } else {
-        std::cout << "Normal Battery State: " << batteryLevel << '%' << std::endl;;
+        Sleep(1000);
     }
 
-    Sleep(3000);
 
     return EXIT_SUCCESS;
 }

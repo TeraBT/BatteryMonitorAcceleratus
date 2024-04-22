@@ -1,6 +1,9 @@
 #include "batterystat.h"
 
-BatteryStatus::BatteryStatus() {
+
+#if defined(_WIN32) || defined(_WIN64)
+
+BatteryStatus::BatteryStatus() : powerStatus() {
     update();
 }
 
@@ -17,3 +20,10 @@ bool BatteryStatus::isCharging() {
     update();
     return (powerStatus.BatteryFlag == 8);
 }
+#elif defined(__linux__)
+// todo
+
+#else
+// todo
+#endif
+
