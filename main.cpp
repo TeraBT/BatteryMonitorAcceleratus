@@ -1,4 +1,7 @@
 #include <iostream>
+#include <vector>
+#include <string>
+
 #include "batterystat.h"
 
 #if defined(_WIN32) || defined(_WIN64)
@@ -17,10 +20,15 @@
 
 int main(int argc, char *argv[]) {
 
+    struct BatteryStatusRecord {
+        int batteryLevel = -1;
+        bool isCharging = false;
+    } batteryStatusRecord;
+    std::vector<BatteryStatusRecord> recordVector;
 
+    BatteryStatus batteryStatus;
     int batteryLevel;
     bool isCharging;
-    BatteryStatus batteryStatus;
 
     while (true) {
         isCharging = batteryStatus.isCharging();
@@ -35,6 +43,9 @@ int main(int argc, char *argv[]) {
             std::cout << "Battery level optimal: " << batteryLevel << "%. Charging: "
                       << (isCharging == 1 ? "Yes" : "No") << ".\n";
         }
+
+        recordVector.push_back(BatteryStatusRecord(batteryLevel, isCharging));
+//        std::cout << str(recordVector.begin(), recordVector.end());
 
         SLEEP(2);
     }
