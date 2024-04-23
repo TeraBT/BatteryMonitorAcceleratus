@@ -1,4 +1,4 @@
-#include "batterystat.h"
+#include "BatteryStatus.h"
 
 
 #if defined(_WIN32) || defined(_WIN64)
