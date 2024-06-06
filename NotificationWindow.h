@@ -29,15 +29,15 @@ private:
 
     BatteryStatus *batteryStatus;
 
-private slots:
+//    void updateState();
 
-    static void onButtonClicked();
-
-    void updateState();
-
-    void updateWindow();
 
     void toggleVisibility();
+
+private slots:
+    void updateWindow();
+    static void onButtonClicked();
+
 };
 
 #endif

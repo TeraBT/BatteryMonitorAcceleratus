@@ -61,10 +61,12 @@ BatteryStatus::BatteryStatus() : pImpl(new Impl()) {
 BatteryStatus::~BatteryStatus() = default;
 
 int BatteryStatus::getBatteryLevel() {
+    pImpl->update();
     return pImpl->batteryLevel;
 }
 
 bool BatteryStatus::isCharging() {
+    pImpl->update();
     return pImpl->isCharging;
 }
 

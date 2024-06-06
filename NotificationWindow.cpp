@@ -22,23 +22,29 @@ NotificationWindow::NotificationWindow(const QString &statusMessage) {
 
     timer = new QTimer(this);
     timer->setInterval(3000);
-    connect(timer, &QTimer::timeout, this, &NotificationWindow::toggleVisibility);
+    connect(timer, &QTimer::timeout, this, &NotificationWindow::updateWindow);
     timer->start();
 }
 
 void NotificationWindow::onButtonClicked() {
-    auto *clickedLabel = new QLabel("Button Clicked!");
-    clickedLabel->show();
+    auto *onClickLabel = new QLabel("Button Clicked!");
+    onClickLabel->show();
 }
 
 
-void NotificationWindow::updateState() {
-//TODO
-}
+//void NotificationWindow::updateState() {
+//// TODO
+//}
 
 void NotificationWindow::updateWindow() {
-    //TODO
-    statusLabel->setText("Lorem ipsum");
+    // TODO: Process finished with exit code 139 (interrupted by signal 11:SIGSEGV)
+    if (batteryStatus->isCharging()) {
+        statusLabel->setText(QString("Charging: %1%").arg(batteryStatus->getBatteryLevel()));
+    } else {
+        statusLabel->setText(QString("Not Charging: %1%").arg(batteryStatus->getBatteryLevel()));
+    }
+    toggleVisibility();
+
 }
 
 void NotificationWindow::toggleVisibility() {

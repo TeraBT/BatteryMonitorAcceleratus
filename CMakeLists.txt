@@ -26,8 +26,11 @@ set(CMAKE_AUTOMOC ON)
 find_package(Qt6 COMPONENTS Core Widgets REQUIRED)
 #set(CMAKE_EXE_LINKER_FLAGS "--static")
 
-add_executable(BatteryMonitorAcceleratus Main.cpp BatteryStatus.cpp
+add_executable(BatteryMonitorAcceleratus
+        Main.cpp
+        BatteryStatus.cpp
         NotificationWindow.cpp
-        NotificationWindow.h)
+        NotificationWindow.h
+)
 
 target_link_libraries(BatteryMonitorAcceleratus PRIVATE Qt6::Core Qt6::Widgets)
