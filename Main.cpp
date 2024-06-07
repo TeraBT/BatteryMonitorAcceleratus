@@ -63,8 +63,7 @@
 
 int main(int argc, char *argv[]) {
     QApplication app(argc, argv);
-    const QString &msg = "Test";
-    NotificationWindow notificationWindow(msg);
+    NotificationWindow notificationWindow;
     notificationWindow.resize(200, 100);
 
     struct BatteryStatusRecord {
@@ -99,9 +98,8 @@ int main(int argc, char *argv[]) {
 //            SLEEP(1);
 //            notificationWindow.close();
 //        }
-    notificationWindow.show();
 
-    return app.exec();
+    return QApplication::exec();
 
 
 }

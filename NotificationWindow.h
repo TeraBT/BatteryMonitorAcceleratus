@@ -17,7 +17,7 @@ class NotificationWindow : public QWidget {
 Q_OBJECT  // This macro enables the use of Qt's meta-object system for signals and slots
 
 public:
-    explicit NotificationWindow(const QString &statusMessage);
+    explicit NotificationWindow();
 
 private:
     QLabel *statusLabel;
@@ -27,7 +27,7 @@ private:
     QVBoxLayout *layout;
     QTimer *timer;
 
-    BatteryStatus *batteryStatus;
+    BatteryStatus *batteryStatus = new BatteryStatus();
 
 //    void updateState();
 
@@ -36,7 +36,9 @@ private:
 
 private slots:
     void updateWindow();
-    static void onButtonClicked();
+    void okButtonClicked();
+    void pauseButtonClicked();
+    static void terminateButtonClicked();
 
 };
 
