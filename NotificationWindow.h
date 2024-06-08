@@ -29,6 +29,9 @@ private:
 
     BatteryStatus *batteryStatus = new BatteryStatus();
 
+protected:
+    void closeEvent(QCloseEvent *event) override; // Override the close event
+
 //    void updateState();
 
 

@@ -3,6 +3,7 @@
 #include <QLabel>
 #include <QVBoxLayout>
 #include <QTimer>
+#include <QCloseEvent>
 
 #ifdef _WIN32
 
@@ -84,4 +85,9 @@ void NotificationWindow::updateWindow() {
 
 void NotificationWindow::toggleVisibility() {
     isVisible() ? hide() : show();
+}
+
+void NotificationWindow::closeEvent(QCloseEvent *event) {
+    event->ignore();
+    hide();
 }
