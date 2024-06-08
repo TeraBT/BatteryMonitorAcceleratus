@@ -22,15 +22,11 @@ int main(int argc, char *argv[]) {
     NotificationWindow notificationWindow;
     notificationWindow.resize(200, 100);
 
-    struct BatteryStatusRecord {
-        int batteryLevel = -1;
-        bool isCharging = false;
-    } batteryStatusRecord;
-    std::vector<BatteryStatusRecord> recordVector;
-
-    BatteryStatus batteryStatus;
-    int batteryLevel;
-    bool isCharging;
+//    struct BatteryStatusRecord { // TODO: Implement this?
+//        int batteryLevel = -1;
+//        bool isCharging = false;
+//    } batteryStatusRecord;
+//    std::vector<BatteryStatusRecord> recordVector;
 
     return QApplication::exec();
 

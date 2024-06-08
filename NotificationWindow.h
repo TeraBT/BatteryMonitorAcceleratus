@@ -3,6 +3,10 @@
 
 #include <QWidget>
 #include <QString>
+#include <QLabel>
+#include <QPushButton>
+#include <QVBoxLayout>
+#include <QTimer>
 #include "BatteryStatus.h"
 
 class QPushButton;
@@ -17,17 +21,17 @@ class NotificationWindow : public QWidget {
 Q_OBJECT  // This macro enables the use of Qt's meta-object system for signals and slots
 
 public:
-    explicit NotificationWindow();
+    explicit NotificationWindow(QWidget *parent = nullptr);
 
 private:
-    QLabel *statusLabel;
-    QPushButton *okButton;
-    QPushButton *pauseButton;
-    QPushButton *terminateButton;
-    QVBoxLayout *layout;
-    QTimer *timer;
+    QLabel statusLabel;
+    QPushButton okButton;
+    QPushButton pauseButton;
+    QPushButton terminateButton;
+    QVBoxLayout layout;
+    QTimer timer;
 
-    BatteryStatus *batteryStatus = new BatteryStatus();
+    BatteryStatus batteryStatus;
 
 protected:
     void closeEvent(QCloseEvent *event) override; // Override the close event

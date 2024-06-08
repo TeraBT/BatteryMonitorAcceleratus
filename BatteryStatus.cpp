@@ -75,4 +75,3 @@ bool BatteryStatus::isCharging() {
 #else
 // todo
 #endif
-

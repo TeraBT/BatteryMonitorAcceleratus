@@ -1,33 +1,20 @@
 #ifndef PRAETOR_SYSTEMATIS_BATTERYSTAT_H
 #define PRAETOR_SYSTEMATIS_BATTERYSTAT_H
 
+#include <memory>
+
 #if defined(_WIN32) || defined(_WIN64)
 
 #include <Windows.h>
 #include <memory>
 
-class BatteryStatus {
-private:
-    struct Impl;
-    std::unique_ptr<Impl> pImpl;
 
-public:
-    BatteryStatus();
+//#elif defined(__linux__)
+//
+//
+//#else
 
-    ~BatteryStatus();
-
-    BatteryStatus(const BatteryStatus &) = delete; // Prevent copying
-    BatteryStatus &operator=(const BatteryStatus &) = delete; // Prevent assignment
-
-    int getBatteryLevel();
-
-    bool isCharging();
-
-};
-
-#elif defined(__linux__)
-
-#include <memory>
+#endif
 
 class BatteryStatus {
 private:
@@ -46,9 +33,5 @@ public:
     bool isCharging();
 
 };
-
-#else
-
-#endif
 
 #endif
