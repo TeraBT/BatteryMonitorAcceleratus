@@ -4,6 +4,15 @@
 #include <QVBoxLayout>
 #include <QTimer>
 
+#ifdef _WIN32
+#include <windows.h>
+#define SLEEP(seconds) Sleep(seconds*1000)
+#else
+#include <unistd.h>
+#define SLEEP(seconds) sleep(seconds)
+#endif
+
+
 NotificationWindow::NotificationWindow() {
     statusLabel = new QLabel("", this);
 //    uptimeLabel = new QLabel("Uptime: ", this); //TODO: Implement uptime
@@ -39,14 +48,14 @@ NotificationWindow::NotificationWindow() {
 void NotificationWindow::okButtonClicked() {
     timer->stop();
     hide();
-    sleep(60);
+    SLEEP(60);
     timer->start();
 }
 
 void NotificationWindow::pauseButtonClicked() {
     timer->stop();
     hide();
-    sleep(20*60);
+    SLEEP(20*60);
     timer->start();
 }
 

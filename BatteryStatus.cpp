@@ -4,7 +4,6 @@
 #if defined(_WIN32) || defined(_WIN64)
 
 #include <Windows.h>
-
 struct BatteryStatus::Impl {
     SYSTEM_POWER_STATUS powerStatus;
 
@@ -20,14 +19,15 @@ BatteryStatus::BatteryStatus() : pImpl(new Impl()) {
 BatteryStatus::~BatteryStatus() = default;
 
 int BatteryStatus::getBatteryLevel() {
-    pImpl->update();  // Ensure the latest status is fetched
+    pImpl->update();
     return static_cast<int>(pImpl->powerStatus.BatteryLifePercent);
 }
 
 bool BatteryStatus::isCharging() {
-    pImpl->update();  // Ensure the latest status is fetched
+    pImpl->update();
     return (pImpl->powerStatus.BatteryFlag & 8) != 0; // Check if charging
 }
+
 
 #elif defined(__linux__)
 

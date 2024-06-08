@@ -4,17 +4,21 @@
 #if defined(_WIN32) || defined(_WIN64)
 
 #include <Windows.h>
+#include <memory>
 
 class BatteryStatus {
-    SYSTEM_POWER_STATUS powerStatus{};
-
-    virtual void update();
+private:
+    struct Impl;
+    std::unique_ptr<Impl> pImpl;
 
 public:
     BatteryStatus();
 
-    int getBatteryLevel();
+    ~BatteryStatus();
+    BatteryStatus(const BatteryStatus &) = delete; // Prevent copying
+    BatteryStatus &operator=(const BatteryStatus &) = delete; // Prevent assignment
 
+    int getBatteryLevel();
     bool isCharging();
 };
 
