@@ -35,9 +35,13 @@ private:
     void toggleVisibility();
 
 private slots:
+
     void updateWindow();
+
     void okButtonClicked();
+
     void pauseButtonClicked();
+
     static void terminateButtonClicked();
 
 };

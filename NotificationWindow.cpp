@@ -5,7 +5,9 @@
 #include <QTimer>
 
 #ifdef _WIN32
+
 #include <windows.h>
+
 #define SLEEP(seconds) Sleep(seconds*1000)
 #else
 #include <unistd.h>
@@ -55,7 +57,7 @@ void NotificationWindow::okButtonClicked() {
 void NotificationWindow::pauseButtonClicked() {
     timer->stop();
     hide();
-    SLEEP(20*60);
+    SLEEP(20 * 60);
     timer->start();
 }
 
@@ -70,11 +72,11 @@ void NotificationWindow::terminateButtonClicked() {
 
 void NotificationWindow::updateWindow() {
     if (batteryStatus->isCharging() && batteryStatus->getBatteryLevel() >= 80) {
-            statusLabel->setText(QString("Battery level too high: %1%").arg(batteryStatus->getBatteryLevel()));
-            toggleVisibility();
+        statusLabel->setText(QString("Battery level too high: %1%").arg(batteryStatus->getBatteryLevel()));
+        toggleVisibility();
     } else if (!batteryStatus->isCharging() && batteryStatus->getBatteryLevel() <= 20) {
-            statusLabel->setText(QString("Battery level too low: %1%").arg(batteryStatus->getBatteryLevel()));
-            toggleVisibility();
+        statusLabel->setText(QString("Battery level too low: %1%").arg(batteryStatus->getBatteryLevel()));
+        toggleVisibility();
     } else {
         hide();
     }

@@ -15,11 +15,14 @@ public:
     BatteryStatus();
 
     ~BatteryStatus();
+
     BatteryStatus(const BatteryStatus &) = delete; // Prevent copying
     BatteryStatus &operator=(const BatteryStatus &) = delete; // Prevent assignment
 
     int getBatteryLevel();
+
     bool isCharging();
+
 };
 
 #elif defined(__linux__)
@@ -41,6 +44,7 @@ public:
     int getBatteryLevel();
 
     bool isCharging();
+
 };
 
 #else

@@ -4,6 +4,7 @@
 #if defined(_WIN32) || defined(_WIN64)
 
 #include <Windows.h>
+
 struct BatteryStatus::Impl {
     SYSTEM_POWER_STATUS powerStatus;
 
@@ -25,7 +26,7 @@ int BatteryStatus::getBatteryLevel() {
 
 bool BatteryStatus::isCharging() {
     pImpl->update();
-    return (pImpl->powerStatus.BatteryFlag & 8) != 0; // Check if charging
+    return (pImpl->powerStatus.BatteryFlag & 8) != 0;
 }
 
 
