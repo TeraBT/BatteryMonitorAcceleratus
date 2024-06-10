@@ -48,14 +48,14 @@ NotificationWindow::NotificationWindow(QWidget *parent)
 }
 
 void NotificationWindow::okButtonClicked() {
-    timer.stop();
+    timer.stop(); // TODO: What if not stopped? Will "timer thread" sleep too?
     hide();
     SLEEP(60);
     timer.start();
 }
 
 void NotificationWindow::pauseButtonClicked() {
-    timer.stop();
+    timer.stop(); // TODO: What if not stopped? Will "timer thread" sleep too?
     hide();
     SLEEP(20 * 60);
     timer.start();
