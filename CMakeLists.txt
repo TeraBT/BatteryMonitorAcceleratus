@@ -28,7 +28,9 @@ add_executable(BatteryMonitorAcceleratus
         Main.cpp
         BatteryStatus.cpp
         NotificationWindow.cpp
+        MemoryStatus.cpp
         NotificationWindow.h
+        MemoryStatus.h
 )
 
 target_link_libraries(BatteryMonitorAcceleratus PRIVATE Qt6::Core Qt6::Widgets)

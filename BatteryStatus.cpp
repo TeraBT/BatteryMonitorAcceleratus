@@ -1,6 +1,5 @@
 #include "BatteryStatus.h"
 
-
 #if defined(_WIN32) || defined(_WIN64)
 
 #include <Windows.h>
@@ -12,12 +11,6 @@ struct BatteryStatus::Impl {
         GetSystemPowerStatus(&powerStatus);
     }
 };
-
-BatteryStatus::BatteryStatus() : pImpl(new Impl()) {
-    pImpl->update();
-}
-
-BatteryStatus::~BatteryStatus() = default;
 
 int BatteryStatus::getBatteryLevel() {
     pImpl->update();
@@ -55,23 +48,22 @@ struct BatteryStatus::Impl {
     }
 };
 
+void BatteryStatus::update() {
+    pImpl->update();
+}
+
+int BatteryStatus::getBatteryLevel() {
+    return pImpl->batteryLevel;
+}
+
+bool BatteryStatus::isCharging() {
+    return pImpl->isCharging;
+}
+
+#endif
+
 BatteryStatus::BatteryStatus() : pImpl(new Impl()) {
     pImpl->update();
 }
 
 BatteryStatus::~BatteryStatus() = default;
-
-int BatteryStatus::getBatteryLevel() {
-    pImpl->update();
-    return pImpl->batteryLevel;
-}
-
-bool BatteryStatus::isCharging() {
-    pImpl->update();
-    return pImpl->isCharging;
-}
-
-
-#else
-// todo
-#endif

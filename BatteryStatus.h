@@ -6,13 +6,6 @@
 #if defined(_WIN32) || defined(_WIN64)
 
 #include <Windows.h>
-#include <memory>
-
-
-//#elif defined(__linux__)
-//
-//
-//#else
 
 #endif
 
@@ -23,15 +16,15 @@ private:
 
 public:
     BatteryStatus();
+    ~BatteryStatus();
+    BatteryStatus(const BatteryStatus &) = delete;
+    BatteryStatus &operator=(const BatteryStatus &) = delete;
 
-    ~BatteryStatus();  // Needed to define a custom destructor
-    BatteryStatus(const BatteryStatus &) = delete; // Prevent copying
-    BatteryStatus &operator=(const BatteryStatus &) = delete; // Prevent assignment
+    void update();
 
     int getBatteryLevel();
 
     bool isCharging();
-
 };
 
 #endif

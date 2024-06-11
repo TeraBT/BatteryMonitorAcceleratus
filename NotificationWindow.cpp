@@ -1,4 +1,5 @@
 #include "NotificationWindow.h"
+#include "MemoryStatus.h"
 #include <QPushButton>
 #include <QLabel>
 #include <QVBoxLayout>
@@ -48,14 +49,14 @@ NotificationWindow::NotificationWindow(QWidget *parent)
 }
 
 void NotificationWindow::okButtonClicked() {
-    timer.stop(); // TODO: What if not stopped? Will "timer thread" sleep too?
+    timer.stop();
     hide();
     SLEEP(60);
     timer.start();
 }
 
 void NotificationWindow::pauseButtonClicked() {
-    timer.stop(); // TODO: What if not stopped? Will "timer thread" sleep too?
+    timer.stop();
     hide();
     SLEEP(20 * 60);
     timer.start();
@@ -71,6 +72,11 @@ void NotificationWindow::terminateButtonClicked() {
 //}
 
 void NotificationWindow::updateWindow() {
+//    MemoryStatus memoryStatus; // TODO: Issues with reading values.
+//    memoryStatus.update();
+//    printf("%f, %f, %f\n", memoryStatus.getTotalMemory(), memoryStatus.getAvailableMemory(),
+//           memoryStatus.getUsedMemory());
+    batteryStatus.update();
     if (batteryStatus.isCharging() && batteryStatus.getBatteryLevel() >= 80) {
         statusLabel.setText(QString("Battery level too high: %1%").arg(batteryStatus.getBatteryLevel()));
         toggleVisibility();
