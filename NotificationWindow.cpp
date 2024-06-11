@@ -12,7 +12,10 @@
 
 #define SLEEP(seconds) Sleep(seconds*1000)
 #else
+
 #include <unistd.h>
+#include <iostream>
+
 #define SLEEP(seconds) sleep(seconds)
 #endif
 
@@ -46,6 +49,7 @@ NotificationWindow::NotificationWindow(QWidget *parent)
     connect(&timer, &QTimer::timeout, this, &NotificationWindow::updateWindow);
     timer.start();
     updateWindow();
+
 }
 
 void NotificationWindow::okButtonClicked() {
@@ -66,16 +70,13 @@ void NotificationWindow::terminateButtonClicked() {
     exit(EXIT_SUCCESS);
 }
 
-
-//void NotificationWindow::updateState() {
-//// TODO
-//}
-
 void NotificationWindow::updateWindow() {
-//    MemoryStatus memoryStatus; // TODO: Issues with reading values.
+
 //    memoryStatus.update();
-//    printf("%f, %f, %f\n", memoryStatus.getTotalMemory(), memoryStatus.getAvailableMemory(),
-//           memoryStatus.getUsedMemory());
+//    printf("Memory: %.1f / %.1f GB (%.2f%%) used. Available: %.1f GB.\n", memoryStatus.getUsedMemory(),
+//           memoryStatus.getTotalMemory(), memoryStatus.getUsedMemory() / memoryStatus.getTotalMemory() * 100,
+//           memoryStatus.getAvailableMemory());
+
     batteryStatus.update();
     if (batteryStatus.isCharging() && batteryStatus.getBatteryLevel() >= 80) {
         statusLabel.setText(QString("Battery level too high: %1%").arg(batteryStatus.getBatteryLevel()));

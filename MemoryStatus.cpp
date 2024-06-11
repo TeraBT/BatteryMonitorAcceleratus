@@ -29,36 +29,33 @@
 #include <fstream>
 #include <string>
 #include <sstream>
+#include <iostream>
 
 struct MemoryStatus::Impl {
     float totalMemory;
     float availableMemory;
 
     void update() {
-        std::ifstream meminfoFile("/sys/proc/meminfo");
+        std::ifstream meminfoFile("/proc/meminfo");
 
         if (meminfoFile.is_open()) {
             std::string line;
-            std::istringstream iss;
-            std::string key;
+            std::string description;
             int value;
-            std::string unit;
-
 
             for (int i = 0; i < 3; ++i) {
 
                 std::getline(meminfoFile, line);
+                std::istringstream iss(line);
 
                 switch (i) {
                     case 0:
-                        iss.str(line);
-                        iss >> key >> value >> unit;
-                        totalMemory = float(value) / 1000;
+                        iss >> description >> value;
+                        totalMemory = float(value) / 1e6f;
                         break;
                     case 2:
-                        iss.str(line);
-                        iss >> key >> value >> unit;
-                        availableMemory = float(value) / 1000;
+                        iss >> description >> value;
+                        availableMemory = float(value) / 1e6f;
                         break;
                     default:
                         break;

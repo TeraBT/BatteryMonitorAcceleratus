@@ -1,5 +1,5 @@
-#ifndef MAINWINDOW_H
-#define MAINWINDOW_H
+#ifndef NOTIFICATION_WINDOW_H
+#define NOTIFICATION_WINDOW_H
 
 #include <QWidget>
 #include <QString>
@@ -8,6 +8,7 @@
 #include <QVBoxLayout>
 #include <QTimer>
 #include "BatteryStatus.h"
+#include "MemoryStatus.h"
 
 class QPushButton;
 
@@ -32,12 +33,10 @@ private:
     QTimer timer;
 
     BatteryStatus batteryStatus;
+//    MemoryStatus memoryStatus;
 
 protected:
-    void closeEvent(QCloseEvent *event) override; // Override the close event
-
-//    void updateState();
-
+    void closeEvent(QCloseEvent *event) override;
 
     void toggleVisibility();
 
