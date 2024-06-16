@@ -6,7 +6,7 @@
 #include <QTimer>
 #include <QCloseEvent>
 
-#ifdef _WIN32
+#if defined(_WIN32) || defined(_WIN64)
 
 #include <windows.h>
 
@@ -71,12 +71,6 @@ void NotificationWindow::terminateButtonClicked() {
 }
 
 void NotificationWindow::updateWindow() {
-
-//    memoryStatus.update();
-//    printf("Memory: %.1f / %.1f GB (%.2f%%) used. Available: %.1f GB.\n", memoryStatus.getUsedMemory(),
-//           memoryStatus.getTotalMemory(), memoryStatus.getUsedMemory() / memoryStatus.getTotalMemory() * 100,
-//           memoryStatus.getAvailableMemory());
-
     batteryStatus.update();
     if (batteryStatus.isCharging() && batteryStatus.getBatteryLevel() >= 80) {
         statusLabel.setText(QString("Battery level too high: %1%").arg(batteryStatus.getBatteryLevel()));

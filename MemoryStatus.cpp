@@ -5,31 +5,29 @@
 
 #include <Windows.h>
 
-//struct MemoryStatus::Impl {
-//    SYSTEM_POWER_STATUS powerStatus;
-//
-//    void update() {
-//        GetSystemPowerStatus(&powerStatus);
-//    }
-//};
-//
-//int MemoryStatus::getBatteryLevel() {
-//    pImpl->update();
-//    return static_cast<int>(pImpl->powerStatus.BatteryLifePercent);
-//}
-//
-//bool MemoryStatus::isCharging() {
-//    pImpl->update();
-//    return (pImpl->powerStatus.BatteryFlag & 8) != 0;
-//}
-//
+struct MemoryStatus::Impl {
+    SYSTEM_POWER_STATUS powerStatus;
+
+    void update() {
+        GetSystemPowerStatus(&powerStatus);
+    }
+};
+
+int MemoryStatus::getBatteryLevel() {
+    pImpl->update();
+    return static_cast<int>(pImpl->powerStatus.BatteryLifePercent);
+}
+
+bool MemoryStatus::isCharging() {
+    pImpl->update();
+    return (pImpl->powerStatus.BatteryFlag & 8) != 0;
+}
+
 
 #elif defined(__linux__)
 
 #include <fstream>
-#include <string>
 #include <sstream>
-#include <iostream>
 
 struct MemoryStatus::Impl {
     float totalMemory;

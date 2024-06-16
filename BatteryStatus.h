@@ -1,13 +1,13 @@
-#ifndef PRAETOR_SYSTEMATIS_BATTERYSTAT_H
-#define PRAETOR_SYSTEMATIS_BATTERYSTAT_H
+#ifndef BATTERYSTAT_H
+#define BATTERYSTAT_H
 
 #include <memory>
 
-#if defined(_WIN32) || defined(_WIN64)
-
-//#include <Windows.h>
-
-#endif
+//#if defined(_WIN32) || defined(_WIN64)
+//
+//#include <windows.h>
+//
+//#endif
 
 class BatteryStatus {
 private:

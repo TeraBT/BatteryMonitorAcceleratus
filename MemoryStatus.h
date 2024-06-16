@@ -3,11 +3,11 @@
 
 #include <memory>
 
-#if defined(_WIN32) || defined(_WIN64)
-
-//#include <Windows.h>
-
-#endif
+//#if defined(_WIN32) || defined(_WIN64)
+//
+//#include <windows.h>
+//
+//#endif
 
 class MemoryStatus {
 private:
