@@ -8,7 +8,7 @@
 
 #if defined(_WIN32) || defined(_WIN64)
 
-#include <windows.h>
+#include <Windows.h>
 
 #define SLEEP(seconds) Sleep(seconds*1000)
 #else

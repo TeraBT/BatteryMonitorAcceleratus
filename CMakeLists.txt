@@ -16,21 +16,21 @@ set(CMAKE_AUTOMOC ON)
 find_package(Qt6 COMPONENTS Core Widgets REQUIRED)
 
 if (CMAKE_SYSTEM_NAME STREQUAL "Windows")
-#    set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -static -static-libgcc -static-libstdc++")
-#    set(CMAKE_EXE_LINKER_FLAGS "${CMAKE_EXE_LINKER_FLAGS} -static")
+    set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -static -static-libgcc -static-libstdc++")
+    set(CMAKE_EXE_LINKER_FLAGS "${CMAKE_EXE_LINKER_FLAGS} -static")
 elseif (CMAKE_SYSTEM_NAME STREQUAL "Linux")
 #    set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -static -static-libgcc -static-libstdc++")
 #    set(CMAKE_EXE_LINKER_FLAGS "${CMAKE_EXE_LINKER_FLAGS} -static")
-#    set(CMAKE_FIND_LIBRARY_SUFFIXES ".a" ".lib" ".so" ".dll")
 endif ()
+#set(CMAKE_FIND_LIBRARY_SUFFIXES ".a" ".lib" ".so" ".dll")
 
-add_executable(BatteryMonitorAcceleratus
+add_executable(BatteryMonitorAcceleratus WIN32
         Main.cpp
         BatteryStatus.cpp
         NotificationWindow.cpp
-        MemoryStatus.cpp
+#        MemoryStatus.cpp
         NotificationWindow.h
-        MemoryStatus.h
+#        MemoryStatus.h
 )
 
 target_link_libraries(BatteryMonitorAcceleratus PRIVATE Qt6::Core Qt6::Widgets)

@@ -62,6 +62,10 @@ bool BatteryStatus::isCharging() {
 
 #endif
 
+void BatteryStatus::update() {
+    pImpl->update();
+}
+
 BatteryStatus::BatteryStatus() : pImpl(new Impl()) {
     pImpl->update();
 }
